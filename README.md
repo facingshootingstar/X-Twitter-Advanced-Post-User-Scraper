@@ -328,38 +328,6 @@ Each record includes 20+ structured fields including full engagement metrics, ex
 
 ---
 
-## 💰 Service Pricing Guide
-
-This tool can be packaged as a professional fixed-price data extraction service.
-
-### Pricing Tiers
-
-| Tier | Price Range | Deliverables |
-|------|-------------|--------------|
-| **Basic** | $800 – $1,200 | Single-keyword or single-user scrape, CSV/JSON export, up to 10K tweets |
-| **Professional** | $1,200 – $1,800 | Multi-keyword/user scraping, advanced filters, Excel reports with analytics, up to 50K tweets |
-| **Enterprise** | $1,800 – $2,500 | Full deployment, custom queries, scheduled scraping, follower network mapping, API integration, ongoing support |
-
-### Value Proposition for Clients
-
-- **Time savings**: Manual data collection would take 40–100+ hours
-- **Data quality**: Structured, deduplicated, analysis-ready output
-- **Scale**: Thousands of data points collected in minutes
-- **Compliance**: Ethical, API-based extraction (no TOS violations)
-- **Expertise**: Professional-grade code with retry logic and error handling
-
-### Where to Sell
-
-- **Upwork / Fiverr** — Fixed-price gigs for "Twitter data extraction"
-- **Toptal / Gun.io** — Premium freelance platforms
-- **Direct outreach** — Marketing agencies, PR firms, research labs
-- **Productized service** — Monthly subscription for ongoing monitoring
-
-### Client Pitch Template
-
-> *"I provide professional X/Twitter data extraction services for market research, brand monitoring, and competitive intelligence. Using enterprise-grade tooling with full API compliance, I deliver structured datasets (CSV/JSON/Excel) with engagement metrics, sentiment-ready text, and network mapping. Typical turnaround: 24–48 hours."*
-
----
 
 ## 📄 License
 
