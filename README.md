@@ -1,91 +1,56 @@
-<![CDATA[# 🐦 X (Twitter) Advanced Post & User Scraper
+<div align="center">
+
+# 🐦 X (Twitter) Advanced Post & User Scraper
+
+**A high-performance Python scraping engine for extracting tweets, replies, user profiles, engagement metrics, and hashtag data from X (formerly Twitter) — powered by Playwright stealth automation.**
 
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Twitter API v2](https://img.shields.io/badge/Twitter%20API-v2-1DA1F2?logo=twitter&logoColor=white)](https://developer.twitter.com)
-[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Playwright](https://img.shields.io/badge/Playwright-1.52-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-A **production-grade** X (Twitter) data extraction engine for researchers, marketers, and analysts. Scrape tweets, replies, user profiles, engagement metrics, hashtags, and follower networks using Twitter API v2 with intelligent Playwright browser fallback — all through a beautiful CLI interface.
+[Features](#-key-features) · [Quick Start](#-quick-start) · [Usage](#-usage) · [Export](#-export-formats)
 
-> **Built for professionals who need reliable, structured Twitter data at scale.**
-
----
-
-## 📑 Table of Contents
-
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Quick Start](#-quick-start)
-- [Usage](#-usage)
-- [Configuration](#-configuration)
-- [Output Formats](#-output-formats)
-- [Rate Limiting & Anti-Detection](#-rate-limiting--anti-detection)
-- [Ethical Use Policy](#%EF%B8%8F-ethical-use-policy)
-- [Service Pricing Guide](#-service-pricing-guide)
-- [License](#-license)
+</div>
 
 ---
 
-## ✨ Features
+## 📌 About This Project
+
+A personal automation project exploring advanced web scraping techniques on the X (Twitter) platform. This tool demonstrates expertise in browser automation, anti-detection strategies, async Python patterns, and structured data extraction — built as a learning exercise and portfolio piece.
+
+---
+
+## ✨ Key Features
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **Keyword Search** | Search tweets by keyword, phrase, or complex boolean queries |
-| 🔬 **Advanced Search** | Filter by user, hashtags, language, engagement thresholds, media, date ranges |
-| 👤 **User Timeline** | Extract any public user's tweet history (with or without replies) |
-| 📋 **Profile Extraction** | Full user profile data: bio, location, metrics, verification status |
-| 👥 **Follower/Following** | Map social graphs — extract followers and following lists |
-| 💬 **Reply Threads** | Fetch full reply threads for any tweet via conversation_id |
-| #️⃣ **Hashtag Tracking** | Monitor hashtag trends with language filtering |
-| 📊 **Engagement Metrics** | Likes, retweets, replies, quotes, bookmarks, impressions |
-| 🌐 **Browser Fallback** | Playwright-powered headless scraping when API limits are reached |
-| 📁 **Multi-Format Export** | CSV, JSON, and Excel output with automatic timestamping |
-
----
-
-## 🏗 Architecture
-
-```
-┌──────────────────────────────────────────────────────┐
-│                     CLI (main.py)                     │
-│              Click commands + Rich UI                 │
-├──────────────────────────────────────────────────────┤
-│                   XScraper Façade                     │
-│            Unified API for all operations             │
-├─────────────────────┬────────────────────────────────┤
-│  TwitterAPIScraper  │       BrowserScraper           │
-│    (tweepy v2)      │      (Playwright)              │
-│    ── Primary ──    │    ── Fallback ──              │
-├─────────────────────┴────────────────────────────────┤
-│              Shared Utilities Layer                    │
-│   Logging · Export · Dedup · Query Builder · Clean    │
-├──────────────────────────────────────────────────────┤
-│           Config (Pydantic + .env)                    │
-└──────────────────────────────────────────────────────┘
-```
+| 🔍 **Tweet Extraction** | Full tweet text, media URLs, timestamps, engagement counts (likes, retweets, replies, views) |
+| 👤 **User Profile Scraping** | Bio, follower/following counts, join date, verification status, profile images |
+| 💬 **Reply & Thread Parsing** | Nested reply chains with parent-child relationships |
+| #️⃣ **Hashtag & Keyword Search** | Search by keyword, hashtag, or advanced query operators |
+| 🛡️ **Full Stealth Mode** | Anti-bot-detection with fingerprint spoofing, navigator overrides, and randomized behavior |
+| 🧠 **Human-Like Behavior** | Random typing delays, scroll patterns, and page-interaction timing |
+| 📦 **Multi-Format Export** | CSV, XLSX (auto-width columns), and JSON output with timestamps |
+| 🔄 **Batch Scraping** | Process multiple queries or user profiles from a configuration file |
+| 🔁 **Auto-Retry with Backoff** | Tenacity-powered exponential backoff on transient failures |
+| 📊 **Rich CLI Dashboard** | Beautiful terminal output with progress bars, tables, and colored logs |
 
 ---
 
 ## 🛠 Tech Stack
 
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| Python | 3.11+ | Core runtime |
-| tweepy | 4.15.0 | Twitter API v2 client |
-| httpx | 0.28.1 | Async HTTP client |
-| Playwright | 1.49.1 | Headless browser fallback |
-| Pydantic | 2.10.5 | Config validation |
-| pandas | 2.2.3 | Data manipulation & export |
-| Rich | 13.9.4 | Terminal UI & tables |
-| Click | 8.1.8 | CLI framework |
-| Loguru | 0.7.3 | Structured logging |
-| tenacity | 9.0.0 | Retry with backoff |
-| orjson | 3.10.14 | Fast JSON serialisation |
-| fake-useragent | 2.0.3 | User-agent rotation |
-| openpyxl | 3.1.5 | Excel export |
-| tqdm | 4.67.1 | Progress bars |
+| Technology | Purpose |
+|------------|---------|
+| Python 3.11+ | Core runtime |
+| Playwright | Browser automation engine |
+| Rich | Terminal UI, logging, tables |
+| Pandas | Data manipulation & export |
+| openpyxl | Excel (.xlsx) writer |
+| Tenacity | Retry logic with backoff |
+| fake-useragent | Randomized user-agent strings |
+| python-dotenv | Environment configuration |
+| aiofiles | Async file I/O |
 
 ---
 
@@ -93,19 +58,17 @@ A **production-grade** X (Twitter) data extraction engine for researchers, marke
 
 ```
 X-Twitter-Advanced-Post-User-Scraper/
-├── main.py                # CLI entry point — all commands
-├── scraper.py             # Core scraping engine (API + Browser)
-├── config.py              # Pydantic config loader
-├── requirements.txt       # Python dependencies
-├── .env.example           # Environment variable template
-├── .gitignore             # Git exclusions
-├── README.md              # This file
-├── LICENSE                # MIT License
-├── utils/
-│   ├── __init__.py
-│   └── helpers.py         # Logging, export, dedup, query builder
-├── output/                # Scraped data (auto-created, git-ignored)
-└── logs/                  # Log files (auto-created, git-ignored)
+├── main.py                 # CLI entry-point with argparse
+├── scraper.py              # Core Playwright scraping engine
+├── config.py               # Centralized configuration loader
+├── requirements.txt        # Pinned dependencies
+├── .env.example            # Environment variable template
+├── .gitignore              # Git exclusions
+├── LICENSE                 # MIT License
+├── README.md               # This file
+└── utils/
+    ├── __init__.py
+    └── helpers.py          # Logging, stealth, export, dedup utilities
 ```
 
 ---
@@ -113,230 +76,121 @@ X-Twitter-Advanced-Post-User-Scraper/
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-- Python 3.11 or higher
-- Twitter API v2 Bearer Token ([Get one here](https://developer.twitter.com/en/portal/dashboard))
+- **Python 3.11+** installed ([download](https://www.python.org/downloads/))
+- **Git** installed
+- A valid **X (Twitter) Developer API key** ([get one here](https://developer.twitter.com/en/portal/dashboard))
 
 ### Installation
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/facingshootingstar/X-Twitter-Advanced-Post-User-Scraper.git
 cd X-Twitter-Advanced-Post-User-Scraper
 
-# Create and activate virtual environment
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # macOS/Linux
+# 2. Create & activate virtual environment
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+source .venv/bin/activate
 
-# Install dependencies
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# Install Playwright browsers (optional — for browser fallback)
+# 4. Install Playwright browsers
 playwright install chromium
 
-# Configure environment
-copy .env.example .env       # Windows
-# cp .env.example .env       # macOS/Linux
+# 5. Configure environment
+cp .env.example .env
+# Edit .env with your credentials and preferences
 ```
-
-Edit `.env` and add your Twitter API credentials.
 
 ---
 
 ## 📖 Usage
 
-### Search Tweets
-
+### Search Tweets by Keyword
 ```bash
-# Basic keyword search
-python main.py search "artificial intelligence"
-
-# Search with limits and format
-python main.py search "python programming" --max 200 --format json
-
-# Sort by recency
-python main.py search "breaking news" --sort recency --max 100
+python main.py search -q "machine learning" -n 100
 ```
 
-### User Timeline
-
+### Scrape User Profile
 ```bash
-# Fetch a user's tweets
-python main.py user-tweets elonmusk --max 100
-
-# Include replies
-python main.py user-tweets openai --max 200 --replies
+python main.py profile -u "elonmusk" --include-tweets
 ```
 
-### User Profile
-
+### Hashtag Extraction
 ```bash
-# Single profile
-python main.py user-profile elonmusk
-
-# Multiple profiles
-python main.py user-profiles elonmusk openai Google --format excel
+python main.py search -q "#python" -n 50 -f xlsx
 ```
 
-### Hashtag Search
-
+### Batch Mode
 ```bash
-# Search by hashtag
-python main.py hashtag python --max 300
-
-# With language filter
-python main.py hashtag AI --lang en --max 500
+python main.py --batch queries.txt -n 30 -f csv
 ```
 
-### Followers & Following
-
+### Debug Mode (Visible Browser)
 ```bash
-# Get followers
-python main.py followers elonmusk --max 500
-
-# Get following
-python main.py following openai --max 300
-```
-
-### Tweet Replies
-
-```bash
-# Fetch replies to a specific tweet
-python main.py replies 1234567890123456789 --max 100
-```
-
-### Advanced Search
-
-```bash
-# Multi-filter search
-python main.py advanced \
-  --keywords "AI,machine learning" \
-  --from-user openai \
-  --lang en \
-  --min-likes 100 \
-  --has-media \
-  --since 2024-01-01
-
-# Search with engagement thresholds
-python main.py advanced \
-  --hashtags "python,coding" \
-  --min-retweets 50 \
-  --min-replies 10 \
-  --format excel
-```
-
-### Global Options
-
-```bash
-# Enable debug logging
-python main.py --debug search "test"
-
-# Custom output directory
-python main.py search "data" --output-dir ./my_data
-
-# Disable preview table
-python main.py search "quiet" --no-preview
+python main.py search -q "AI news" --no-headless
 ```
 
 ---
 
-## ⚙ Configuration
+## 📤 Export Formats
 
-All settings are managed via `.env` file. See [`.env.example`](.env.example) for all options.
+All exports are saved to the `output/` directory with timestamps.
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `TWITTER_BEARER_TOKEN` | *required* | API v2 Bearer Token |
-| `MAX_TWEETS` | `500` | Default max tweets per query |
-| `MIN_DELAY` / `MAX_DELAY` | `1.5` / `4.0` | Rate-limit delay range (seconds) |
-| `OUTPUT_FORMAT` | `csv` | Default export format |
-| `OUTPUT_DIR` | `./output` | Output directory |
-| `USE_BROWSER_FALLBACK` | `false` | Enable Playwright fallback |
-| `HEADLESS` | `true` | Browser headless mode |
-| `LOG_LEVEL` | `INFO` | Logging verbosity |
-
----
-
-## 📁 Output Formats
-
-### CSV (Default)
-```
-output/search_AI_20240115_143022.csv
+### CSV
+```csv
+tweet_id,author,text,likes,retweets,replies,views,timestamp,url
+17283...,@user,"Example tweet...",142,23,5,12847,2026-04-15T10:30:00Z,https://...
 ```
 
 ### JSON
 ```json
 [
   {
-    "id": "1234567890",
-    "text": "Tweet content here…",
-    "author_username": "user",
-    "like_count": 42,
-    "retweet_count": 10,
-    "hashtags": ["AI", "python"],
-    "scraped_at": "2024-01-15T14:30:22+00:00"
+    "tweet_id": "1728300000000000000",
+    "author": "@user",
+    "text": "Example tweet...",
+    "likes": 142,
+    "retweets": 23,
+    "replies": 5,
+    "views": 12847,
+    "timestamp": "2026-04-15T10:30:00Z",
+    "url": "https://x.com/user/status/..."
   }
 ]
 ```
 
-### Excel
-```
-output/search_AI_20240115_143022.xlsx
-```
-
-Each record includes 20+ structured fields including full engagement metrics, extracted entities (hashtags, mentions, URLs), cleaned text, and metadata.
+### XLSX
+- Auto-sized columns
+- Ready for analysis in Excel or Google Sheets
 
 ---
 
-## 🛡 Rate Limiting & Anti-Detection
+## ⚖️ Ethical Usage & Legal Disclaimer
 
-- **Automatic rate-limit handling** via tweepy's `wait_on_rate_limit`
-- **Exponential backoff** with jitter on 429/5xx errors (up to 5 retries)
-- **Configurable delays** between requests (`MIN_DELAY` / `MAX_DELAY`)
-- **Browser stealth** with webdriver flag removal and realistic viewport
-- **User-agent rotation** for browser scraping mode
-- **Deduplication** engine to prevent redundant data
+> **⚠️ This tool is for educational and research purposes only.**
 
----
-
-## ⚖️ Ethical Use Policy
-
-> **This tool is designed for legitimate research, journalism, and business analytics.**
-
-### ✅ Acceptable Use
-- Academic research and sentiment analysis
-- Brand monitoring and competitive intelligence
-- Journalism and public interest investigations
-- Marketing research with aggregated, anonymised data
-
-### ❌ Prohibited Use
-- Stalking, harassment, or surveillance of individuals
-- Collecting data for discriminatory purposes
-- Violating Twitter/X Terms of Service
-- Reselling raw personal data
-- Building profiles for unauthorized targeting
-
-### Legal Compliance
-- Always comply with Twitter's [Terms of Service](https://twitter.com/en/tos) and [Developer Agreement](https://developer.twitter.com/en/developer-terms/agreement)
-- Respect GDPR, CCPA, and applicable data privacy laws
-- Store data securely and implement data retention policies
-- Obtain necessary consent where required by law
-- This tool does **not** bypass authentication or access private data
-
-> **The authors assume no liability for misuse. Users are solely responsible for ensuring their use complies with all applicable laws and platform policies.**
+- **Respect X's Terms of Service.** Automated scraping may violate platform ToS. Use at your own risk.
+- **Comply with local laws**, including GDPR, CCPA, and other data privacy regulations.
+- **Do not use** extracted data for spamming, harassment, or any unlawful activity.
+- **Rate-limit your requests** to avoid overloading servers. The built-in delays are designed for responsible use.
+- The author assumes **no liability** for misuse of this software.
 
 ---
-
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-<p align="center">
-  <strong>Built with ❤️ for data professionals</strong><br>
-  <sub>If this tool saves you time, consider giving it a ⭐</sub>
-</p>
-]]>
+<div align="center">
+
+**Built with ❤️ by [@facingshootingstar](https://github.com/facingshootingstar)**
+
+*Made for personal learning and portfolio purposes.*
+
+</div>
